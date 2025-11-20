@@ -1,35 +1,35 @@
     
-# Название вашего образа
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: atomic-hyprland
-# Описание
 description: Atomic immutable Fedora core + Hyprland + NVIDIA Drivers
-
-# БАЗОВЫЙ ОБРАЗ (Чистая Fedora + NVIDIA драйверы)
 base-image: ghcr.io/ublue-os/base-nvidia
-image-version: 42                 # Версия Fedora-Atomic
+image-version: 42
 
 modules:
-  # 1. Установка пакетов
   - type: rpm-ostree
     install:
-      - hyprland                         # Графика / Оконный менеджер
-      - xdg-desktop-portal-hyprland      # Чтобы работали скриншаринг и открытие файлов
-      - polkit-gnome                     # Для запроса пароля (sudo в GUI)
-      - sddm                             # Экран входа
-      - kitty                            # Терминал
-      - wofi                             # Меню
-      - waybar                           # Статусная строка
-      - gparted                          # Настройка дисков (полезно при установке)
+      - hyprland
+      - xdg-desktop-portal-hyprland
+      - polkit-gnome
+      - sddm
+      - kitty
+      - wofi
+      - waybar
+      - gparted
+      - pavucontrol
+      - libva-nvidia-driver
 
-  # 2. Включение сервисов при загрузке
   - type: systemd
     system:
       enabled:
         - sddm.service
         - nvidia-persistenced.service
 
-  # 3. Настройка пользователя (чтобы не создавать вручную группы)
   - type: default-uids
     min-uid: 1000
 
+  - type: files
+    files:
+      - source: system
+        destination: /
   
