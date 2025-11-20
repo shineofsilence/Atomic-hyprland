@@ -1,7 +1,7 @@
 name: Generate ISO
 
 on:
-  workflow_dispatch: # Это добавит кнопку ручного запуска
+  workflow_dispatch: # Ручной запуск кнопкой
 
 jobs:
   iso:
@@ -11,21 +11,21 @@ jobs:
       packages: write
       id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Build ISO
-        uses: blue-build/modules/iso-generator@v0.9
+        uses: jasonn3/build-container-installer@v1.2.4
         with:
-          # Имя должно совпадать с name: в вашем recipe.yml
-          image-name: atomic-hyprland
-          # Версия установщика Fedora
-          installer-major-version: 42
-          
+          arch: x86_64
+          image_name: atomic-hyprland
+          image_repo: ghcr.io/shineofsilence
+          image_tag: latest
+          version: 42  # <--- ИСПРАВЛЕНО НА 42
+          variant: Silverblue
+          iso_name: atomic-hyprland-42.iso
+
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: my-atomic-os-iso
+          name: atomic-hyprland-iso
           path: |
             ./*.iso
             ./*.iso-CHECKSUM
