@@ -18,7 +18,7 @@ jobs:
           image_name: atomic-hyprland
           image_repo: ghcr.io/shineofsilence
           image_tag: latest
-          version: 42  # <--- ИСПРАВЛЕНО НА 42
+          version: 41
           variant: Silverblue
           iso_name: atomic-hyprland-42.iso
 
