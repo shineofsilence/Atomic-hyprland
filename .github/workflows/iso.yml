@@ -18,9 +18,9 @@ jobs:
         uses: blue-build/modules/iso-generator@v0.9
         with:
           # Имя должно совпадать с name: в вашем recipe.yml
-          image-name: my-atomic-os
+          image-name: atomic-hyprland
           # Версия установщика Fedora
-          installer-major-version: 41
+          installer-major-version: 42
           
       - name: Upload ISO
         uses: actions/upload-artifact@v4
