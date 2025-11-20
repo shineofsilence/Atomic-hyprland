@@ -25,9 +25,6 @@ modules:
         - sddm.service
         - nvidia-persistenced.service
 
-  - type: default-uids
-    min-uid: 1000
-
   - type: files
     files:
       - source: system
