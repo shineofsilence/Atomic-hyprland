@@ -1,0 +1,34 @@
+name: Generate ISO
+
+on:
+  workflow_dispatch: # Это добавит кнопку ручного запуска
+
+jobs:
+  iso:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build ISO
+        uses: blue-build/modules/iso-generator@v0.9
+        with:
+          # Имя должно совпадать с name: в вашем recipe.yml
+          image-name: my-atomic-os
+          # Версия установщика Fedora
+          installer-major-version: 41
+          
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-atomic-os-iso
+          path: |
+            ./*.iso
+            ./*.iso-CHECKSUM
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
