@@ -12,7 +12,7 @@ jobs:
       id-token: write
     steps:
       - name: Build ISO
-        uses: jasonn3/build-container-installer@v1.2.4
+        uses: jasonn3/build-container-installer@v1.4.0
         with:
           arch: x86_64
           image_name: atomic-hyprland
